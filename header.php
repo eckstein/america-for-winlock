@@ -44,6 +44,4 @@
             );
             ?>
         </nav><!-- #site-navigation -->
-    </header><!-- #masthead -->
-</body>
-</html> 
+    </header><!-- #masthead --> 

@@ -1,7 +1,7 @@
 /**
  * File navigation.js.
  *
- * Handles navigation menu toggle on small screens.
+ * Handles navigation menu toggle on small screens and sticky header.
  */
 (function() {
     'use strict';
@@ -55,5 +55,27 @@
                 }
             }
         });
+    });
+    
+    // Sticky header functionality
+    const header = document.querySelector('.site-header');
+    let scrollPos = window.scrollY;
+    
+    // Apply initial header state
+    if (scrollPos > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    // Update header on scroll
+    window.addEventListener('scroll', function() {
+        scrollPos = window.scrollY;
+        
+        if (scrollPos > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     });
 })(); 

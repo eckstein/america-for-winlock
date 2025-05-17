@@ -1,70 +1,67 @@
 <?php
 /**
- * Template part for displaying the endorsements section
+ * Template part for displaying the Endorsements section
  *
  * @package America_for_Winlock
  */
 
-$title = get_theme_mod('endorsements_title', 'Endorsements');
-$intro = get_theme_mod('endorsements_intro', '');
-// In a real implementation, endorsements would likely be a custom post type or stored in the Customizer
-// For demo purposes, we'll use hardcoded content
-$endorsements = get_theme_mod('endorsements', array(
-    array(
-        'name' => 'John Smith',
-        'title' => 'Former Mayor of Winlock',
-        'quote' => 'America is the leader our town needs. Their vision for Winlock aligns perfectly with what our citizens want and need.',
-        'image' => '',
-    ),
-    array(
-        'name' => 'Jane Doe',
-        'title' => 'Local Business Owner',
-        'quote' => 'I\'ve known the candidate for years, and I can attest to their integrity and commitment to our community.',
-        'image' => '',
-    ),
-));
-?>
+$title = get_theme_mod('endorsements_title', __('Endorsements', 'america-for-winlock'));
+$number_of_endorsements = get_theme_mod('endorsements_number_to_show', 5); // New Customizer setting
 
+$endorsement_args = array(
+    'post_type'      => 'endorsement',
+    'posts_per_page' => $number_of_endorsements,
+    'orderby'        => 'date', // Or 'rand', 'title', etc.
+    'order'          => 'DESC',
+);
+$endorsements_query = new WP_Query($endorsement_args);
+
+?>
 <section id="endorsements" class="endorsements-section campaign-section">
     <div class="site-content">
-        <header class="section-header">
-            <h2 class="section-title"><?php echo esc_html($title); ?></h2>
-            <?php if (!empty($intro)) : ?>
-                <div class="section-description"><?php echo wp_kses_post($intro); ?></div>
-            <?php endif; ?>
-        </header>
+        <?php america_for_winlock_section_title($title); ?>
         
-        <div class="endorsements-list">
-            <?php if (!empty($endorsements)) : ?>
-                <?php foreach ($endorsements as $endorsement) : ?>
-                    <div class="endorsement">
-                        <?php if (!empty($endorsement['image'])) : ?>
+        <?php if ($endorsements_query->have_posts()) : ?>
+            <div class="endorsements-list owl-carousel">
+                <?php while ($endorsements_query->have_posts()) : $endorsements_query->the_post(); ?>
+                    <?php
+                    $endorser_title_org = get_post_meta(get_the_ID(), '_endorser_title', true);
+                    ?>
+                    <article id="endorsement-<?php the_ID(); ?>" <?php post_class('endorsement-item'); ?>>
+                        <?php if (has_post_thumbnail()) : ?>
                             <div class="endorser-image">
-                                <img src="<?php echo esc_url($endorsement['image']); ?>" alt="<?php echo esc_attr($endorsement['name']); ?>">
-                            </div>
-                        <?php else : ?>
-                            <div class="endorser-image">
-                                <img src="<?php echo esc_url(get_template_directory_uri() . '/images/placeholder.png'); ?>" alt="<?php echo esc_attr($endorsement['name']); ?>">
+                                <?php the_post_thumbnail('thumbnail'); // Or a custom size like 'medium' or a square crop ?>
                             </div>
                         <?php endif; ?>
-                        
                         <div class="endorser-content">
-                            <h3 class="endorser-name"><?php echo esc_html($endorsement['name']); ?></h3>
-                            <?php if (!empty($endorsement['title'])) : ?>
-                                <p class="endorser-title"><?php echo esc_html($endorsement['title']); ?></p>
+                            <h3 class="endorser-name"><?php the_title(); ?></h3>
+                            <?php if ($endorser_title_org) : ?>
+                                <p class="endorser-title-org"><?php echo esc_html($endorser_title_org); ?></p>
                             <?php endif; ?>
-                            
-                            <?php if (!empty($endorsement['quote'])) : ?>
-                                <blockquote class="endorsement-quote">
-                                    "<?php echo esc_html($endorsement['quote']); ?>"
-                                </blockquote>
-                            <?php endif; ?>
+                            <blockquote class="endorsement-quote">
+                                <?php echo wp_kses_post(get_the_content()); // Using get_the_content() for the blockquote ?>
+                            </blockquote>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <p><?php _e('Add endorsements in the Customizer under "Endorsements Section" settings.', 'america-for-winlock'); ?></p>
-            <?php endif; ?>
-        </div>
+                    </article>
+                <?php endwhile; ?>
+            </div>
+            <?php wp_reset_postdata(); ?>
+        <?php elseif (is_customize_preview()) : ?>
+             <div class="no-endorsements-message">
+                <p><?php esc_html_e('No endorsements found. Add some from the Endorsements menu.', 'america-for-winlock'); ?></p>
+            </div>
+        <?php endif; ?>
+        
+        <?php 
+        // Optional: Link to a page with all endorsements, if such a page exists or is desired.
+        // $all_endorsements_link = get_theme_mod('all_endorsements_link', ''); 
+        // if ($all_endorsements_link) : 
+        ?>
+        <!-- <div class="all-endorsements-link">
+            <a href="<?php // echo esc_url($all_endorsements_link); ?>" class="campaign-button">
+                <?php // esc_html_e('See All Endorsements', 'america-for-winlock'); ?>
+            </a>
+        </div> -->
+        <?php // endif; ?>
     </div>
 </section> 

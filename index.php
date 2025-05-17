@@ -61,19 +61,19 @@ get_header();
         get_template_part('template-parts/sections/section', 'contact');
     }
     
-    // Custom Sections
-    $custom_sections = get_theme_mod('custom_sections', array());
-    if (!empty($custom_sections)) {
-        foreach ($custom_sections as $index => $section) {
-            if (isset($section['enabled']) && $section['enabled']) {
-                // Pass section data to the template part through a global variable
-                $GLOBALS['section_data'] = $section;
-                get_template_part('template-parts/sections/section', 'custom');
-                // Clean up the global variable after use
-                unset($GLOBALS['section_data']);
-            }
-        }
-    }
+    // Custom Sections - Removed as this functionality was not fully implemented or user-friendly for this theme's purpose.
+    // $custom_sections = get_theme_mod('custom_sections', array());
+    // if (!empty($custom_sections)) {
+    //     foreach ($custom_sections as $index => $section) {
+    //         if (isset($section['enabled']) && $section['enabled']) {
+    //             // Pass section data to the template part through a global variable
+    //             $GLOBALS['section_data'] = $section;
+    //             get_template_part('template-parts/sections/section', 'custom');
+    //             // Clean up the global variable after use
+    //             unset($GLOBALS['section_data']);
+    //         }
+    //     }
+    // }
     ?>
 </main><!-- #main -->
 

@@ -420,33 +420,92 @@ function america_for_winlock_add_section_controls($wp_customize) {
         'type'     => 'textarea',
     ));
 
-    // Add repeater fields for platform issues using custom controls
-    $issues = array(
-        array(
-            'icon' => 'fa-money-bill',
-            'title' => 'Economy',
-            'description' => 'Building a stronger local economy',
-        ),
-        array(
-            'icon' => 'fa-leaf',
-            'title' => 'Environment',
-            'description' => 'Protecting our natural resources',
-        ),
-        array(
-            'icon' => 'fa-building',
-            'title' => 'Infrastructure',
-            'description' => 'Improving roads and public facilities',
-        ),
-    );
-    
-    $wp_customize->add_setting('platform_issues', array(
-        'default'           => $issues,
-        'sanitize_callback' => 'america_for_winlock_sanitize_platform_issues',
-        'transport'         => 'refresh',
+    // Platform Issue 1
+    $wp_customize->add_setting('platform_issue_1_title', array(
+        'default'           => __('Issue 1 Title', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_1_title', array(
+        'label'    => __('Platform Issue 1: Title', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_1_icon', array(
+        'default'           => 'fas fa-check-circle',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_1_icon', array(
+        'label'    => __('Platform Issue 1: Icon (e.g., fas fa-leaf)', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_1_description', array(
+        'default'           => __('Description for issue 1.', 'america-for-winlock'),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('platform_issue_1_description', array(
+        'label'    => __('Platform Issue 1: Description', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'textarea',
     ));
 
-    // Add other sections (Endorsements, Get Involved, Events, Donate, News, Contact)
-    // Each will follow a similar pattern to the sections above
+    // Platform Issue 2
+    $wp_customize->add_setting('platform_issue_2_title', array(
+        'default'           => __('Issue 2 Title', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_2_title', array(
+        'label'    => __('Platform Issue 2: Title', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_2_icon', array(
+        'default'           => 'fas fa-check-circle',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_2_icon', array(
+        'label'    => __('Platform Issue 2: Icon', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_2_description', array(
+        'default'           => __('Description for issue 2.', 'america-for-winlock'),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('platform_issue_2_description', array(
+        'label'    => __('Platform Issue 2: Description', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'textarea',
+    ));
+
+    // Platform Issue 3
+    $wp_customize->add_setting('platform_issue_3_title', array(
+        'default'           => __('Issue 3 Title', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_3_title', array(
+        'label'    => __('Platform Issue 3: Title', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_3_icon', array(
+        'default'           => 'fas fa-check-circle',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('platform_issue_3_icon', array(
+        'label'    => __('Platform Issue 3: Icon', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'text',
+    ));
+    $wp_customize->add_setting('platform_issue_3_description', array(
+        'default'           => __('Description for issue 3.', 'america-for-winlock'),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('platform_issue_3_description', array(
+        'label'    => __('Platform Issue 3: Description', 'america-for-winlock'),
+        'section'  => 'platform_section',
+        'type'     => 'textarea',
+    ));
     
     // Endorsements Section
     $wp_customize->add_section('endorsements_section', array(
@@ -475,6 +534,22 @@ function america_for_winlock_add_section_controls($wp_customize) {
         'label'    => __('Section Title', 'america-for-winlock'),
         'section'  => 'endorsements_section',
         'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting('endorsements_number_to_show', array(
+        'default'           => 5,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('endorsements_number_to_show', array(
+        'label'    => __('Number of Endorsements to Show', 'america-for-winlock'),
+        'section'  => 'endorsements_section',
+        'type'     => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+            'max' => 15,
+            'step' => 1,
+        ),
     ));
     
     // Get Involved Section
@@ -557,6 +632,56 @@ function america_for_winlock_add_section_controls($wp_customize) {
         'section'  => 'events_section',
         'type'     => 'text',
     ));
+
+    $wp_customize->add_setting('events_number_to_show', array(
+        'default'           => 3,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('events_number_to_show', array(
+        'label'    => __('Number of Events to Show', 'america-for-winlock'),
+        'section'  => 'events_section',
+        'type'     => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+            'max' => 10,
+            'step' => 1,
+        ),
+    ));
+
+    $wp_customize->add_setting('events_no_events_text', array(
+        'default'           => __('Check back soon for upcoming events!', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('events_no_events_text', array(
+        'label'    => __('"No Events" Message', 'america-for-winlock'),
+        'section'  => 'events_section',
+        'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting('events_view_all_text', array(
+        'default'           => __('View All Events', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('events_view_all_text', array(
+        'label'    => __('"View All Events" Button Text', 'america-for-winlock'),
+        'section'  => 'events_section',
+        'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting( 'events_archive_page_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'absint' // Page ID should be an integer
+    ) );
+
+    $wp_customize->add_control( 'events_archive_page_id', array(
+        'label'       => __( 'Events Archive Page', 'america-for-winlock' ),
+        'description' => __( 'Optional. Select a page to link to for all events. Defaults to the Event CPT archive if not set.', 'america-for-winlock' ),
+        'section'     => 'events_section',
+        'type'        => 'dropdown-pages'
+    ) );
     
     // Donate Section
     $wp_customize->add_section('donate_section', array(
@@ -606,6 +731,62 @@ function america_for_winlock_add_section_controls($wp_customize) {
     $wp_customize->add_control('donate_button_text', array(
         'label'    => __('Donate Button Text', 'america-for-winlock'),
         'section'  => 'donate_section',
+        'type'     => 'text',
+    ));
+    
+    // News Section (Latest Posts)
+    $wp_customize->add_section('news_section', array(
+        'title'      => __('News Section', 'america-for-winlock'),
+        'panel'      => 'section_controls',
+        'priority'   => 80, // Adjust priority as needed
+    ));
+
+    $wp_customize->add_setting('show_news_section', array(
+        'default'           => true,
+        'sanitize_callback' => 'america_for_winlock_sanitize_checkbox',
+    ));
+
+    $wp_customize->add_control('show_news_section', array(
+        'label'    => __('Show News Section', 'america-for-winlock'),
+        'section'  => 'news_section',
+        'type'     => 'checkbox',
+    ));
+
+    $wp_customize->add_setting('news_title', array(
+        'default'           => __('Latest News', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('news_title', array(
+        'label'    => __('Section Title', 'america-for-winlock'),
+        'section'  => 'news_section',
+        'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting('news_posts_per_page', array(
+        'default'           => 3,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('news_posts_per_page', array(
+        'label'    => __('Number of Posts to Show', 'america-for-winlock'),
+        'section'  => 'news_section',
+        'type'     => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+            'max' => 10, // Reasonable max for a homepage section
+            'step' => 1,
+        ),
+    ));
+
+    $wp_customize->add_setting('news_view_all_text', array(
+        'default'           => __('View All News', 'america-for-winlock'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('news_view_all_text', array(
+        'label'    => __('"View All" Button Text', 'america-for-winlock'),
+        'section'  => 'news_section',
         'type'     => 'text',
     ));
     
@@ -660,23 +841,6 @@ function america_for_winlock_sanitize_checkbox($checked) {
 
 function america_for_winlock_sanitize_html($html) {
     return wp_kses_post($html);
-}
-
-function america_for_winlock_sanitize_platform_issues($issues) {
-    if (!is_array($issues)) {
-        return array();
-    }
-    
-    $sanitized_issues = array();
-    foreach ($issues as $issue) {
-        $sanitized_issues[] = array(
-            'icon' => sanitize_text_field($issue['icon']),
-            'title' => sanitize_text_field($issue['title']),
-            'description' => sanitize_text_field($issue['description']),
-        );
-    }
-    
-    return $sanitized_issues;
 }
 
 /**

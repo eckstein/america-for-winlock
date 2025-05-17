@@ -1,57 +1,59 @@
 <?php
 /**
- * Template part for displaying the platform section
+ * Template part for displaying the Platform/Issues section
  *
  * @package America_for_Winlock
  */
 
-$title = get_theme_mod('platform_title', 'My Platform');
+$title = get_theme_mod('platform_title', __('My Platform', 'america-for-winlock'));
 $intro = get_theme_mod('platform_intro', '');
-$issues = get_theme_mod('platform_issues', array(
-    array(
-        'icon' => 'fa-money-bill',
-        'title' => 'Economy',
-        'description' => 'Building a stronger local economy',
-    ),
-    array(
-        'icon' => 'fa-leaf',
-        'title' => 'Environment',
-        'description' => 'Protecting our natural resources',
-    ),
-    array(
-        'icon' => 'fa-building',
-        'title' => 'Infrastructure',
-        'description' => 'Improving roads and public facilities',
-    ),
-));
+
+// Retrieve individual platform issues
+$platform_issues_data = array();
+for ($i = 1; $i <= 3; $i++) {
+    $issue_title = get_theme_mod("platform_issue_$i_title");
+    // Only add the issue if its title is set, to allow for less than 3 issues
+    if ($issue_title) {
+        $platform_issues_data[] = array(
+            'title'       => $issue_title,
+            'icon'        => get_theme_mod("platform_issue_$i_icon", 'fas fa-check-circle'),
+            'description' => get_theme_mod("platform_issue_$i_description"),
+        );
+    }
+}
+
 ?>
 
 <section id="platform" class="platform-section campaign-section">
     <div class="site-content">
-        <header class="section-header">
-            <h2 class="section-title"><?php echo esc_html($title); ?></h2>
-            <?php if (!empty($intro)) : ?>
-                <div class="section-description"><?php echo wp_kses_post($intro); ?></div>
-            <?php endif; ?>
-        </header>
+        <?php america_for_winlock_section_title($title, $intro); ?>
         
-        <div class="platform-issues">
-            <?php if (!empty($issues)) : ?>
-                <?php foreach ($issues as $issue) : ?>
-                    <div class="platform-issue">
+        <?php if (!empty($platform_issues_data)) : ?>
+            <div class="platform-issues-wrapper">
+                <?php foreach ($platform_issues_data as $issue) : ?>
+                    <div class="platform-issue-item">
                         <?php if (!empty($issue['icon'])) : ?>
                             <div class="issue-icon">
-                                <i class="fas <?php echo esc_attr($issue['icon']); ?>"></i>
+                                <i class="<?php echo esc_attr($issue['icon']); ?>"></i>
                             </div>
                         <?php endif; ?>
-                        
-                        <h3 class="issue-title"><?php echo esc_html($issue['title']); ?></h3>
-                        <div class="issue-description"><?php echo esc_html($issue['description']); ?></div>
+                        <div class="issue-content">
+                            <?php if (!empty($issue['title'])) : ?>
+                                <h3 class="issue-title"><?php echo esc_html($issue['title']); ?></h3>
+                            <?php endif; ?>
+                            <?php if (!empty($issue['description'])) : ?>
+                                <div class="issue-description">
+                                    <?php echo wp_kses_post($issue['description']); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
-            <?php else : ?>
-                <p><?php _e('Add platform issues in the Customizer under "Platform Section" settings.', 'america-for-winlock'); ?></p>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php elseif (is_customize_preview()) : ?>
+            <div class="no-issues-message">
+                <p><?php esc_html_e('Platform issues will be displayed here. Configure them in the Customizer under Page Sections > Platform/Issues Section.', 'america-for-winlock'); ?></p>
+            </div>
+        <?php endif; ?>
     </div>
 </section> 

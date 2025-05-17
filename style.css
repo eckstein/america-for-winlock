@@ -250,9 +250,8 @@ img {
 
 .hero-subtitle {
   font-size: 1.8rem;
-  margin-bottom: 40px;
-  font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .hero-buttons {
@@ -302,90 +301,155 @@ img {
   margin-bottom: 20px;
 }
 
-/* Platform Section */
-.platform-issues {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Platform/Issues Section */
+.platform-issues-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
+  margin-top: 30px;
 }
 
-.platform-issue {
-  flex: 0 0 calc(33.333% - 30px);
-  min-width: 250px;
-  padding: 30px;
-  background-color: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+.platform-issue-item {
+  background-color: #fff;
+  padding: 25px;
   border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column; /* Align items vertically by default */
+  align-items: center; /* Center items for a nice look */
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.platform-issue:hover {
-  transform: translateY(-10px);
+.platform-issue-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.issue-icon {
-  font-size: 2.5rem;
+.platform-issue-item .issue-icon {
+  font-size: 2.5rem; /* Larger icon */
   color: var(--primary-color);
-  margin-bottom: 20px;
-}
-
-.issue-title {
-  font-size: 1.5rem;
   margin-bottom: 15px;
+  line-height: 1; /* Ensure icon aligns well */
+}
+
+.platform-issue-item .issue-content {
+  /* No specific styles needed if text-align: center on parent is enough */
+}
+
+.platform-issue-item .issue-title {
+  font-size: 1.4rem;
   color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.platform-issue-item .issue-description {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.no-issues-message {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--light-gray);
+    border-radius: 4px;
+    margin-top: 20px;
 }
 
 /* Endorsements Section */
 .endorsements-list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  /* If using Owl Carousel, these might be overridden or need adjustment */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
-.endorsement {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  background-color: white;
-  padding: 30px;
+.endorsement-item {
+  background-color: #fff;
+  border: 1px solid var(--light-gray);
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.endorsement-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .endorser-image {
-  flex: 0 0 120px;
-}
-
-.endorser-image img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.endorser-content {
-  flex: 1;
-}
-
-.endorser-name {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-  color: var(--primary-color);
-}
-
-.endorser-title {
-  font-style: italic;
   margin-bottom: 15px;
 }
 
+.endorser-image img {
+  width: 100px; /* Adjust size as needed */
+  height: 100px;
+  border-radius: 50%; /* Circular images */
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+  border: 3px solid var(--light-gray);
+}
+
+.endorser-name {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.endorser-title-org {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
 .endorsement-quote {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
   margin: 0;
-  padding-left: 20px;
-  border-left: 3px solid var(--secondary-color);
+  padding: 0;
+  border-left: 3px solid var(--primary-color);
+  padding-left: 15px;
+  text-align: left;
+}
+
+.endorsement-quote p {
+  margin-bottom: 0;
+}
+
+.no-endorsements-message {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--light-gray);
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+/* Owl Carousel specific styles (if used) */
+.owl-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.owl-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.owl-dot.active {
+    background-color: var(--primary-color);
 }
 
 /* Social Links */
@@ -493,32 +557,250 @@ img {
 }
 
 /* Contact Section */
-.contact-content {
+.contact-content-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-.contact-info,
-.contact-form {
-  flex: 1 1 400px;
+.contact-details-column,
+.contact-form-column {
+  flex: 1;
+  min-width: 300px; /* Ensures columns don't get too narrow */
 }
 
-.contact-item {
-  margin-bottom: 15px;
+.contact-details-column .contact-info {
+  margin-bottom: 20px;
+}
+
+.contact-details-column .contact-item {
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
 }
 
-.contact-social {
+.contact-details-column .contact-item i {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-right: 15px;
+  width: 20px; /* For alignment */
+  text-align: center;
+}
+
+.contact-details-column .contact-item a {
+  color: var(--text-color);
+}
+
+.contact-details-column .contact-item a:hover {
+  color: var(--primary-color);
+}
+
+.contact-details-column .social-links {
+  margin-top: 20px; 
+  /* Uses existing .social-links styles, but can be overridden */
+}
+
+.contact-form-column .embedded-form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.contact-form-column .embedded-form-container.placeholder-form p {
+    margin:0;
+    text-align: center;
+    color: var(--dark-gray);
+}
+
+/* Events Section */
+.events-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.event {
+  background-color: #fff;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.event-date {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  width: 70px; /* Fixed width for date block */
+  margin-right: 20px;
+  margin-bottom: 15px; /* For stacked layout on small screens */
+}
+
+.event-date .event-month {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.event-date .event-day {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.event-details {
+  flex: 1;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.event-title a {
+  color: var(--primary-color);
+}
+
+.event-title a:hover {
+  color: var(--secondary-color);
+}
+
+.event-meta {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+  margin-bottom: 10px;
+}
+
+.event-meta span {
+  margin-right: 15px;
+}
+
+.event-meta i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+.event-description {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.event .campaign-button {
+  margin-top: auto; /* Push button to bottom of flex item */
+}
+
+.all-events-link {
+  text-align: center;
   margin-top: 30px;
 }
 
-.contact-form {
-  padding: 30px;
-  background-color: var(--light-gray);
-  border-radius: 8px;
+.no-events-message {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--light-gray);
+    border-radius: 4px;
 }
+
+/* News Section */
+.news-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.news-post {
+  background-color: #fff;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  overflow: hidden; /* To contain the image */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.news-post .post-thumbnail a {
+  display: block;
+  overflow: hidden; /* For image zoom effect on hover if added */
+}
+
+.news-post .post-thumbnail img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.news-post:hover .post-thumbnail img {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.news-post .post-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allows button to stick to bottom */
+}
+
+.news-post .post-title {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.news-post .post-title a {
+  color: var(--primary-color);
+}
+
+.news-post .post-title a:hover {
+  color: var(--secondary-color);
+}
+
+.news-post .post-meta {
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+  margin-bottom: 10px;
+}
+
+.news-post .post-excerpt {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  flex-grow: 1; /* Pushes button down if content is short */
+}
+
+.news-post .read-more {
+  margin-top: auto; /* Sticks button to the bottom */
+  align-self: flex-start; /* Align button to left */
+}
+
+.all-news-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Get Involved Section */
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -582,4 +864,34 @@ img {
   .platform-issue {
     width: 100%;
   }
+
+  .events-list,
+  .endorsements-list,
+  .news-posts,
+  .platform-issues-wrapper {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .event-date {
+      margin-right: 0; /* Remove right margin when date is above details */
+      margin-bottom: 15px;
+      width: auto; /* Allow date block to be full width if desired or centered */
+  }
+
+  .contact-content-wrapper {
+      flex-direction: column; /* Stack contact columns */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  /* Further adjustments for very small screens if needed */
 } 

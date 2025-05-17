@@ -1,0 +1,494 @@
+/*
+Theme Name: America for Winlock
+Theme URI: 
+Author: 
+Description: A custom WordPress theme for a mayoral political campaign, featuring a one-page layout with customizable sections.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: america-for-winlock
+Tags: one-page, customizable, political-campaign
+*/
+
+:root {
+  --primary-color: #003DA5;
+  --secondary-color: #E50000;
+  --accent-color: #FFFFFF;
+  --text-color: #333333;
+  --background-color: #F5F5F5;
+  --light-gray: #EEEEEE;
+  --dark-gray: #444444;
+}
+
+/* Basic Styles */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Container for sections */
+.site-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Section styling */
+.campaign-section {
+  padding: 60px 0;
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--secondary-color);
+}
+
+.text-left .section-title:after {
+  left: 0;
+  transform: none;
+}
+
+.text-right .section-title:after {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.section-description {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* Button styling */
+.campaign-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.campaign-button:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.campaign-button.secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.campaign-button.secondary:hover {
+  background-color: transparent;
+  color: var(--secondary-color);
+}
+
+/* Header */
+.site-header {
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.site-branding {
+  display: inline-block;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.site-description {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+}
+
+/* Navigation */
+.main-navigation {
+  display: inline-block;
+  float: right;
+}
+
+.main-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-navigation li {
+  display: inline-block;
+  position: relative;
+  margin-left: 20px;
+}
+
+.main-navigation a {
+  display: block;
+  padding: 10px 0;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.main-navigation a:hover {
+  color: var(--primary-color);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 100px 0;
+  background-color: var(--primary-color);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+}
+
+.hero-section:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-buttons {
+  margin-top: 30px;
+}
+
+.hero-buttons .campaign-button {
+  margin: 0 10px;
+}
+
+/* About Section */
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.candidate-image {
+  flex: 0 0 300px;
+}
+
+.candidate-image img {
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.candidate-name {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.candidate-position {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 400;
+  color: var(--dark-gray);
+}
+
+.candidate-bio {
+  margin-bottom: 20px;
+}
+
+/* Platform Section */
+.platform-issues {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.platform-issue {
+  flex: 0 0 calc(33.333% - 30px);
+  min-width: 250px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.platform-issue:hover {
+  transform: translateY(-10px);
+}
+
+.issue-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.issue-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+/* Social Links */
+.social-links {
+  margin-top: 20px;
+}
+
+.social-link {
+  display: inline-block;
+  margin-right: 15px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--dark-gray);
+  color: white;
+  padding: 60px 0 30px;
+}
+
+.site-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.footer-branding,
+.footer-contact,
+.footer-social,
+.footer-navigation,
+.site-credits {
+  flex: 1 0 250px;
+  margin-bottom: 30px;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.footer-tagline {
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.footer-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-navigation li {
+  margin-bottom: 10px;
+}
+
+.footer-navigation a {
+  color: white;
+}
+
+.footer-navigation a:hover {
+  color: var(--secondary-color);
+}
+
+.contact-item {
+  margin-bottom: 15px;
+}
+
+.contact-item i {
+  margin-right: 10px;
+  color: var(--secondary-color);
+}
+
+.contact-item a {
+  color: white;
+}
+
+.copyright {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 15px 0;
+  }
+  
+  .main-navigation {
+    float: none;
+    width: 100%;
+    clear: both;
+    margin-top: 15px;
+  }
+  
+  .menu-toggle {
+    display: block;
+    float: right;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 5px;
+    margin-top: -40px;
+  }
+  
+  .primary-menu-container {
+    display: none;
+  }
+  
+  .primary-menu-container.toggled {
+    display: block;
+  }
+  
+  .main-navigation li {
+    display: block;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .about-content,
+  .platform-issues {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .candidate-image,
+  .candidate-info,
+  .platform-issue {
+    width: 100%;
+  }
+} 
